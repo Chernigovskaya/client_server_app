@@ -6,9 +6,9 @@
 
 import yaml
 
-first_key = ['1€', '2ü', '€ã33']
+first_key = ["1\u20AC", "2\xFC", "\u20AC\xE333"]
 second_key = 5
-third_key = {'1Ò': 10, '2§': 20}
+third_key = {"1\xD2": 10, "2\xA7": 20}
 
 data = {'first_key': first_key, 'second_key': second_key, 'third_key': third_key}
 
