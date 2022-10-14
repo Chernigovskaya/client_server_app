@@ -20,6 +20,8 @@ def read_message(sock):  # (объект сокета)
 
 # закодировали и отправили
 def write_message(sock, message):  # (объект сокета и сообщение в виде словаря)
+    if not isinstance(message, dict):
+        raise TypeError
     json_message = json.dumps(message)  # словарь в json-строку
     encoded_message = json_message.encode(encoding=ENCODING)  # json-строку в байты
     sock.send(encoded_message)  # отправили

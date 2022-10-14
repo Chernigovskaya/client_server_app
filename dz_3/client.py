@@ -4,7 +4,7 @@ from socket import AF_INET, SOCK_STREAM, socket
 import time
 
 from common.utils import read_message, write_message
-from dz_3.common.constants import DEFAULT_IP_ADDRESS, DEFAULT_PORT, ACTION, PRESENCE, TIME, USER, ACCOUNT_NAME, \
+from common.constants import DEFAULT_IP_ADDRESS, DEFAULT_PORT, ACTION, PRESENCE, TIME, USER, ACCOUNT_NAME, \
     RESPONSE, ERROR
 
 

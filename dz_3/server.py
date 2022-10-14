@@ -1,4 +1,4 @@
-from socket import AF_INET, SOCK_STREAM, socket
+from socket import AF_INET, SOCK_STREAM, socket, SOL_SOCKET, SO_REUSEADDR
 import sys
 import json
 from dz_3.common.constants import MAX_CONNECTIONS, DEFAULT_PORT, ACTION, PRESENCE, TIME, USER, \
@@ -56,21 +56,25 @@ def server():  # порт
     # Готовим сокет
 
     server_socket = socket(AF_INET, SOCK_STREAM)  # Создает сокет TCP (сетевой, потоковый)
+    server_socket.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1) # чтобы не ждать когда разблокируется после выключения
     server_socket.bind((listen_address, listen_port))  # Присваивает хост и порт
 
     server_socket.listen(MAX_CONNECTIONS)  # режим ожидания клиентов (слушает порт)
 
-    while True:
-        client, client_addr = server_socket.accept()  # запрос на соединение клиентом
-        try:
-            message_from_client = read_message(client)  # клиет шлет сообщение и функция возвращвет словарь
-            print(message_from_client)
-            response = process_client_message(message_from_client)  # распарсит ответ
-            write_message(client, response)  # отправляет ответ клиенту
-            client.close()
-        except (ValueError, json.JSONDecodeError):
-            print('Принято некорректное сообщение от клиента.')
-            client.close()
+    try:
+        while True:
+            client, client_addr = server_socket.accept()  # запрос на соединение клиентом
+            try:
+                message_from_client = read_message(client)  # клиет шлет сообщение и функция возвращвет словарь
+                print(message_from_client)
+                response = process_client_message(message_from_client)  # распарсит ответ
+                write_message(client, response)  # отправляет ответ клиенту
+                client.close()
+            except (ValueError, json.JSONDecodeError):
+                print('Принято некорректное сообщение от клиента.')
+                client.close()
+    finally:
+        server_socket.close()
 
 
 if __name__ == '__main__':
