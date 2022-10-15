@@ -24,4 +24,4 @@ def write_message(sock, message):  # (объект сокета и сообще�
         raise TypeError
     json_message = json.dumps(message)  # словарь в json-строку
     encoded_message = json_message.encode(encoding=ENCODING)  # json-строку в байты
-    sock.send(encoded_message)  # отправили
+    sock.send(encoded_message)  # отправили байты
