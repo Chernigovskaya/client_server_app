@@ -1,8 +1,12 @@
 import json
-
+import sys
 from dz_3.common.constants import MAX_PACKAGE_LENGTH, ENCODING
+sys.path.append('../')
+from decorat import log
+from errors import IncorrectDataRecivedError, NonDictInputError
 
 
+@log
 # приняли сообщение и декодирование bytes => dict
 def read_message(sock):  # (объект сокета)
 
@@ -13,15 +17,16 @@ def read_message(sock):  # (объект сокета)
             response = json.loads(json_response)  # из строки-json в словарь
             if isinstance(response, dict):
                 return response
-            raise ValueError
-        raise ValueError
-    raise ValueError
+            raise IncorrectDataRecivedError
+        raise IncorrectDataRecivedError
+    raise IncorrectDataRecivedError
 
 
+@log
 # закодировали и отправили
 def write_message(sock, message):  # (объект сокета и сообщение в виде словаря)
     if not isinstance(message, dict):
-        raise TypeError
+        raise NonDictInputError
     json_message = json.dumps(message)  # словарь в json-строку
     encoded_message = json_message.encode(encoding=ENCODING)  # json-строку в байты
     sock.send(encoded_message)  # отправили байты

@@ -24,7 +24,7 @@ stream_hand.setLevel(logging.INFO) #  с уровнем INFO
 # Создать объект Formatter
 # Определить формат сообщений
 
-client_formatter = logging.Formatter('%(asctime)s - %(levelname)-10s - %(module)-20s - %(message)s')
+client_formatter = logging.Formatter('%(asctime)s - %(levelname)-10s - %(module)-10s - %(message)s')
 
 # подключить объект Formatter к обработчику
 stream_hand.setFormatter(client_formatter)

@@ -24,7 +24,7 @@ stream_hand.setLevel(logging.INFO) #  с уровнем INFO
 # Сообщения лога должны иметь следующий формат: "<дата-время> <уровеньважности> <имямодуля> <сообщение>";
 # Создать объект Formatter
 # Определить формат сообщений
-server_formatter = logging.Formatter('%(asctime)s - %(levelname)-10s - %(module)-20s - %(message)s')
+server_formatter = logging.Formatter('%(asctime)s - %(levelname)-10s - %(module)-10s - %(message)s')
 
 # подключить объект Formatter к обработчику
 stream_hand.setFormatter(server_formatter)
