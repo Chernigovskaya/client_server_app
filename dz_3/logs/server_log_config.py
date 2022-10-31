@@ -18,8 +18,8 @@ file_hand = logging.handlers.TimedRotatingFileHandler(path, when='D', interval=1
 file_hand.setLevel(logging.INFO)#  с уровнем INFO
 
 # стримовый обработчик
-stream_hand = logging.StreamHandler() # передаем в поток
-stream_hand.setLevel(logging.INFO) #  с уровнем INFO
+# stream_hand = logging.StreamHandler() # передаем в поток
+# stream_hand.setLevel(logging.INFO) #  с уровнем INFO
 
 # Сообщения лога должны иметь следующий формат: "<дата-время> <уровеньважности> <имямодуля> <сообщение>";
 # Создать объект Formatter
@@ -27,12 +27,12 @@ stream_hand.setLevel(logging.INFO) #  с уровнем INFO
 server_formatter = logging.Formatter('%(asctime)s - %(levelname)-10s - %(module)-10s - %(message)s')
 
 # подключить объект Formatter к обработчику
-stream_hand.setFormatter(server_formatter)
+#stream_hand.setFormatter(server_formatter)
 file_hand.setFormatter(server_formatter)
 
 
 # Добавить обработчик к регистратору
-log.addHandler(stream_hand) # добавить в поток
+#log.addHandler(stream_hand) # добавить в поток
 log.addHandler(file_hand) # добавить в файл
 
 
